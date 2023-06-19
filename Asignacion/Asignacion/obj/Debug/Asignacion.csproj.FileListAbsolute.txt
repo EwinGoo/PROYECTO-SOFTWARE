@@ -1,0 +1,11 @@
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\bin\Debug\Asignacion.exe.config
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\bin\Debug\Asignacion.exe
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\bin\Debug\Asignacion.pdb
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.csproj.AssemblyReference.cache
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.csproj.SuggestedBindingRedirects.cache
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.Form1.resources
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.Properties.Resources.resources
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.csproj.GenerateResource.cache
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.csproj.CoreCompileInputs.cache
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.exe
+C:\Users\ed\Desktop\PROYECTO-SOFTWARE\Asignacion\Asignacion\obj\Debug\Asignacion.pdb
