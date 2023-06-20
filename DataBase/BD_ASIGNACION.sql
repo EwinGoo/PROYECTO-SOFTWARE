@@ -132,23 +132,157 @@ BEGIN
     SET @contador = @contador + 1
 END
 GO
+/*		TABLA OFICINA		*/
+DROP TABLE OFICINA
+CREATE TABLE [OFICINA]
+(
+	[OFICINA_NO] varchar(10) primary key NOT NULL,
+	[DEPTO] varchar(50) NULL,
+	[COD_OFICINA] int NULL,
+	[NOMBRE_OF] varchar(100) NULL,
+	[EMP_NO] varchar(10) NULL,
+	[UBICACION] varchar(500) NULL
+)
+GO
+CREATE SEQUENCE seq_ofi_id
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9999;	
+GO
+CREATE TRIGGER trg_asigna_id_ofi
+ON oficina
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @SiguienteValor INT;
+    DECLARE @NuevoID VARCHAR(10);
+    SET @SiguienteValor = NEXT VALUE FOR seq_ofi_id;
+    SET @NuevoID = 'OF-' + RIGHT('00' + CAST(@SiguienteValor AS VARCHAR(10)), 2);
+    INSERT INTO oficina (oficina_no,depto,cod_oficina,nombre_of,emp_no,ubicacion)
+    SELECT @NuevoID,depto,cod_oficina,nombre_of,emp_no,ubicacion
+    FROM inserted;
+END;
+GO
+DECLARE @contador INT
+SET @contador = 1
 
+WHILE @contador <= 13
+BEGIN
+    SELECT NEXT VALUE FOR seq_ofi_id AS ValorSecuencia
 
+    SET @contador = @contador + 1
+END
+GO
+/*		TABLA EMPLEADO		*/
+DROP TABLE EMPLEADO
+CREATE TABLE [EMPLEADO]
+(
+	[EMP_NO] varchar(10) primary key NOT NULL,
+	[CI] varchar(50) NOT NULL,
+	[EXP] varchar(50) NULL,
+	[NOMBRE] varchar(150) NULL,
+	[CARGO] varchar(100) NULL,
+	[OFICINA_NO] varchar(10) NULL,
+	[UNIDAD] varchar(100) NULL,
+	[AREA_TRAB] varchar(150) NULL,
+	[CELULAR] int NULL,
+	[PROFESION] varchar(50) NULL,
+	[DPTO] varchar(50) NULL,
+	[USUARIO_NO] varchar(10) NULL,
+	constraint fk_empleado_1 FOREIGN KEY ([USUARIO_NO]) REFERENCES [USUARIO] ([USUARIO_NO]),
+	constraint fk_empleado_2 FOREIGN KEY ([OFICINA_NO]) REFERENCES [OFICINA] ([OFICINA_NO])
+)
+GO
+CREATE SEQUENCE seq_emp_id
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9999;	
+GO
+CREATE TRIGGER trg_asigna_id_emp
+ON empleado
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @SiguienteValor INT;
+    DECLARE @NuevoID VARCHAR(10);
+    SET @SiguienteValor = NEXT VALUE FOR seq_emp_id;
+    SET @NuevoID = 'E-' + RIGHT('000' + CAST(@SiguienteValor AS VARCHAR(10)), 3);
+    INSERT INTO empleado (emp_no,ci,exp,nombre,cargo,oficina_no,unidad,area_trab,celular,profesion,usuario_no)
+    SELECT @NuevoID,ci,exp,nombre,cargo,oficina_no,unidad,area_trab,celular,profesion,usuario_no
+    FROM inserted;
+END;
+GO
+DECLARE @contador INT
+SET @contador = 1
 
+WHILE @contador <= 206
+BEGIN
+    SELECT NEXT VALUE FOR seq_emp_id AS ValorSecuencia
 
+    SET @contador = @contador + 1
+END
+GO
 
+/* TABLA INVENTARIO */
 
+CREATE TABLE [INVENTARIO]
+(
+	[INV_NO] varchar(10) PRIMARY KEY NOT NULL,
+	[DEPTO] varchar(50) NULL,
+	[OFICINA_NO] varchar(50) NULL,
+	[AUXILIAR] varchar(50) NULL,
+	[PARTIDA_NO] varchar(50) NULL,
+	[COD_ENTIDAD] varchar(50) NULL,
+	[COD_ANTIGUO] varchar(150) NULL,
+	[SERIE] varchar(250) NULL,
+	[DESCRIPCION] varchar(250) NULL,
+	[ESTADO] varchar(50) NULL,
+	[GEOGRAFICA] varchar(250) NULL,
+	[EMP_NO] varchar(50) NULL,
+	[PROCEDENCIA] varchar(50) NULL,
+	[FECHA_INGRESO] date NULL,
+	[OBSERVACIONES] varchar(250) NULL,
+	[ESPECIFICA] varchar(50) NULL
+)
+GO
+CREATE SEQUENCE seq_inv_id
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9999;	
+GO
+CREATE TRIGGER trg_asigna_id_inv
+ON inventario
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @SiguienteValor INT;
+    DECLARE @NuevoID VARCHAR(10);
+    SET @SiguienteValor = NEXT VALUE FOR seq_inv_id;
+    SET @NuevoID = 'AF-' + RIGHT('0000' + CAST(@SiguienteValor AS VARCHAR(10)), 4);
+    INSERT INTO inventario (inv_no,depto,oficina_no,auxiliar,partida_no,cod_entidad,cod_antiguo,serie,descripcion,estado,geografica,especifica,emp_no,procedencia,fecha_ingreso,observaciones)
+    SELECT @NuevoID,depto,oficina_no,auxiliar,partida_no,cod_entidad,cod_antiguo,serie,descripcion,estado,geografica,especifica,emp_no,procedencia,fecha_ingreso,observaciones
+    FROM inserted;
+END;
+GO
+DECLARE @contador INT
+SET @contador = 1
 
+WHILE @contador <= 4780
+BEGIN
+    SELECT NEXT VALUE FOR seq_inv_id AS ValorSecuencia
 
+    SET @contador = @contador + 1
+END
+GO
 
+SELECT CURRENT_VALUE AS ValorActual
+FROM sys.sequences
+WHERE name = 'seq_inv_id';
 
-
-
-
-
-
-
-
+select * from INVENTARIO
 
 
 
